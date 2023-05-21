@@ -1,4 +1,8 @@
 module.exports.home = async(req, res) => {
-    console.log("/ request founded");
-    res.send({ page: "home" });
+    return res.render('home', {
+        title: 'home',
+        heading: 'this is home',
+        user: true,
+    });
+
 }

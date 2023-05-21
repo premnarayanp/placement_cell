@@ -1,12 +1,13 @@
 const port = 8394;
 const express = require('express');
-const route = require('./routes')
-
-// create App
+const route = require('./routes');
 const app = express();
 
 // use post request  url
 app.use(express.urlencoded());
+
+//for json req/res
+app.use(express.json());
 
 // use static file 
 app.use(express.static('./assets'));
@@ -15,8 +16,14 @@ app.use(express.static('./assets'));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-//for json req/res
-app.use(express.json());
+// use express layouts
+const expressLayouts = require('express-ejs-layouts');
+app.use(expressLayouts);
+
+// extract style and scripts from sub pages into the layout
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
+
 
 //use routes
 app.use(route);

@@ -1,0 +1,48 @@
+#header {
+    width: 98%;
+    height: 9%;
+    background-color: rgb(225, 208, 109);
+    border-radius: 50px;
+    margin: 0;
+    box-sizing: border-box;
+    border: solid 1px rgb(18, 219, 18);
+}
+
+#menu-bar-list {
+    height: 100%;
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+}
+
+#menu-bar-list li .menu-btn {
+    display: inline-block;
+    color: gray;
+    border: solid 2px gray;
+    background-color: pink;
+    border-radius: 20px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+
+/* #downloads-btn {
+    padding: 0;
+    margin: 0;
+} */
+
+#menu-bar-list li a {
+    text-decoration: none;
+    padding: 3px 10px;
+    font-size: 15px;
+}
+
+#menu-bar-list li .menu-btn:hover {
+    background-color: rgb(227, 34, 66);
+    color: white;
+}
