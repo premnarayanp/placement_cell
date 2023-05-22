@@ -4,33 +4,35 @@
         <%if(!locals.user){%>
 
             <li>
-                <a class="menu-btn">Select Students</a>
+                <a href="/users/sign-in" class="menu-btn"> Login</a>
             </li>
 
             <li>
-                <a class="menu-btn">Select Interview</a>
-            </li>
-
-            <li>
-                <a class="menu-btn">Job List</a>
-            </li>
-
-            <li>
-                <button class="menu-btn" id="downloads-btn">Downloads</button>
-            </li>
-
-            <li>
-                <a href="/users/sign-out" class="menu-btn">Logout</a>
+                <a href="/users/sign-up" class="menu-btn">Sign UP </a>
             </li>
 
             <%}else{%>
+
                 <li>
-                    <a href="/users/sign-in" class="menu-btn"> Login</a>
+                    <button class="menu-btn" onclick="selectStudentsBatch()">Select Batch</button>
                 </li>
 
                 <li>
-                    <a href="/users/sign-up" class="menu-btn">Sign UP </a>
+                    <a class="menu-btn">Select Interview</a>
                 </li>
+
+                <li>
+                    <a class="menu-btn">Job List</a>
+                </li>
+
+                <li>
+                    <button class="menu-btn" id="downloads-btn">Downloads</button>
+                </li>
+
+                <li>
+                    <a href="/users/sign-out" class="menu-btn">Logout</a>
+                </li>
+
                 <%}%>
 
     </ul>

@@ -1,6 +1,12 @@
 const port = 8394;
 const express = require('express');
 const route = require('./routes');
+const db = require('./config/mongoose');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+const MongoStore = require('connect-mongo')(session);
 const app = express();
 
 // use post request  url
@@ -23,6 +29,38 @@ app.use(expressLayouts);
 // extract style and scripts from sub pages into the layout
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
+
+// use cookie-parser
+app.use(cookieParser());
+
+//use session
+app.use(session({
+    name: 'placementCell',
+    // TODO change the secret before deployment in production mode
+    secret: 'blahSomething',
+    saveUninitialized: false,
+
+    resave: false,
+    cookie: {
+        maxAge: (1000 * 60 * 100)
+    },
+    store: new MongoStore({
+            mongooseConnection: db,
+            autoRemove: 'disabled'
+
+        },
+        function(err) {
+            console.log(err || 'connect-mongodb setup ok');
+        }
+    )
+}));
+
+// use passport...
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
+
 
 
 //use routes

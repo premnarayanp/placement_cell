@@ -1,5 +1,9 @@
-<form class="loginForm" action="/users/create_session" method="POST">
+<form class="loginForm" action="/users/create" method="POST">
     <span class='loginSignUpHeader'>Sign Up</span>
+
+    <div class="field">
+        <input type="text" name="name" placeholder="Enter Name" required>
+    </div>
 
     <div class="field">
         <input type="email" name="email" placeholder="Enter Email" required>
@@ -10,7 +14,7 @@
     </div>
 
     <div class="field">
-        <input type="password" name="password" placeholder="Enter Confirm Password" required>
+        <input type="password" name="confirmPassword" placeholder="Enter Confirm Password" required>
     </div>
 
     <div class="field">
