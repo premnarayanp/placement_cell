@@ -1,0 +1,60 @@
+.batch-heading {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 700;
+    line-height: 0;
+    color: gray;
+    margin: 0;
+}
+
+.batch-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 10%;
+}
+
+.batch-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.batch-table thead {
+    background-color: rgb(234, 197, 143);
+}
+
+.batch-table thead th {
+    text-align: center;
+    padding: 10px;
+    border: 2px solid black;
+    color: white;
+}
+
+.batch-table tbody td {
+    text-align: start;
+    padding: 10px;
+    border: 2px solid black;
+}
+
+.batch-table tbody button {
+    cursor: pointer;
+    color: white;
+    background-color: red;
+    border-radius: 10px;
+    margin-left: 20px;
+    font-size: 12px;
+    outline: none;
+    border: solid 1px gray;
+}
+
+
+/* th,
+td {
+    text-align: center;
+    padding: 10px;
+    border: 2px solid black;
+}
+
+th {
+    color: white;
+} */

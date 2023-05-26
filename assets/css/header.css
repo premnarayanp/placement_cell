@@ -1,11 +1,14 @@
-#header {
+body #header {
     width: 98%;
-    height: 9%;
-    background-color: rgb(225, 208, 109);
+    height: 9vh;
+    /* background-color: rgb(225, 208, 109); */
+    background-color: rgb(234, 197, 143);
     border-radius: 50px;
     margin: 0;
+    top: 0;
     box-sizing: border-box;
     border: solid 1px rgb(18, 219, 18);
+    position: fixed;
 }
 
 #menu-bar-list {

@@ -1,11 +1,42 @@
-<div>
-    <h1>Home Page</h1>
-    <h3>
-        <%=locals.title%>
-    </h3>
+<div id="home-container">
 
-    <h3>
-        <%=locals.heading%>
-    </h3>
+    <%if(!locals.user){%>
+
+
+        <%}else{%>
+
+            <%}%>
+
+                <div id="form-container">
+                    <form class="forms" onsubmit="createBatch(event)">
+                        <span class='formsHeader'>Batch Form</span>
+
+                        <div class="field">
+                            <input type="text" id="batchName" name="name" placeholder="Enter Batch Name" required>
+                        </div>
+
+                        <div class="field">
+                            <button type="submit"> Create Batch </button>
+                        </div>
+                    </form>
+
+                    <form class="forms" action="/users/create_session" method="POST">
+                        <span class='formsHeader'>Students form</span>
+
+                        <div class="field">
+                            <input type="text" name="name" placeholder="Enter Students Name" required>
+                        </div>
+
+                        <div class="field">
+                            <input type="text" name="college" placeholder="Enter college" required>
+                        </div>
+
+                        <div class="field">
+                            <button type="submit" value="">Create Students</button>
+                        </div>
+                    </form>
+                </div>
+
+                <%- include('_batch'); %>
 
 </div>

@@ -1,0 +1,36 @@
+#home-container {
+    width: 100%;
+    /* background-color: pink; */
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#form-container {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 0;
+}
+
+
+/* Student Forms */
+
+#form-container .forms {
+    margin: 20px auto;
+}
+
+#form-container .field input {
+    margin-top: 5px;
+    /* height: 35px; */
+}
+
+.field button {
+    margin-top: 10px;
+    /* height: 35px;
+    padding: 5px; */
+}

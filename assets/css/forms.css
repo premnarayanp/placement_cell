@@ -1,10 +1,4 @@
-/* .login-signUp {
-    height: 50%;
-    width: 100%;
-} */
-
-
-/* .loginForm {
+.forms {
     background-color: #fff;
     padding: 20px;
     box-sizing: border-box;
@@ -19,7 +13,7 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
-.loginSignUpHeader {
+.formsHeader {
     font-weight: 600;
     font-size: 30px;
     color: #ef7917;
@@ -61,4 +55,4 @@
 
 .field input:focus {
     outline: none;
-} */
+}
