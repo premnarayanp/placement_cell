@@ -1,0 +1,38 @@
+<div id="students-container">
+    <form class="forms" id="student-forms" onsubmit="return createStudent(event)">
+        <span class='formsHeader'>Stu dents form</span>
+
+        <div class="field">
+            <input type="text" name="name" placeholder="Enter  Name" required>
+        </div>
+
+        <div class="field">
+            <input type="text" name="college" placeholder="Enter college" required>
+        </div>
+
+        <div class="field">
+            <select id="batches" name="batch">
+                
+              <option>Select Batch</option>
+               <%for( batch of locals.batches){%>
+                <%if(batch.user.id==locals.user.id){%>
+                    <option value="<%=batch._id%>"><%=batch.name%></option>
+                    <%}%>
+                  
+               <%}%>
+           </select>
+        </div>
+
+        <div class="field">
+            <button type="submit">Create Students</button>
+        </div>
+    </form>
+
+
+    <%for( batch of locals.batches){%>
+        <%- include('_students'); %>
+            <%}%>
+
+
+                <script src="/js/student.js"></script>
+</div>

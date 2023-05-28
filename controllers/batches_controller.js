@@ -1,4 +1,6 @@
 const Batch = require('../models/batch');
+const LastIndexCounter = require("../models/lastIndexCounter");
+
 //create Batches
 module.exports.create = async function(req, res) {
     const results = {};
@@ -11,12 +13,24 @@ module.exports.create = async function(req, res) {
     try {
         const batch = await Batch.findOne({ name: req.body.name });
         if (!batch) {
+            const lastIndexCounter = await LastIndexCounter.findOne({});
+            if (lastIndexCounter == null) {
+                lastIndexCounter = await LastIndexCounter.create({
+                    lastIndexOfBatch: 100,
+                    lastIndexOfStudents: 100
+                });
+            }
+            // console.log(lastIndexCounter);
 
             const batch = await Batch.create({
+                batchId: lastIndexCounter.lastIndexOfBatch + 1,
                 name: req.body.name,
                 user: req.user.id
             });
-            //console.log("batch=", batch);
+
+            lastIndexCounter.lastIndexOfBatch = lastIndexCounter.lastIndexOfBatch + 1;
+            await lastIndexCounter.save();
+
             results.success = true;
             results.data = { batch: batch };
             return res.send(results);
@@ -34,6 +48,8 @@ module.exports.create = async function(req, res) {
     }
 }
 
+
+//delete Batches
 module.exports.delete = async function(req, res) {
     try {
         // let batch = await Batch.findByIdAndRemove(req.params.id);

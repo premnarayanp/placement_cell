@@ -3,8 +3,9 @@
     <table class="batch-table" id="batchTable">
         <thead>
             <tr>
+                <th>BatchID</th>
                 <th>Batch Name</th>
-                <th>Students Num</th>
+                <th>Total Students</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -14,6 +15,9 @@
             <%for(index in locals.batches){%>
                 <%let batch=locals.batches[index] %>
                     <tr id="<%= batch.id%>">
+                        <td>
+                            <%= batch.batchId%>
+                        </td>
                         <td>
                             <%= batch.name%>
                         </td>

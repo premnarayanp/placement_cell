@@ -1,0 +1,62 @@
+ .studentList-container {
+     width: 100%;
+     padding: 20px;
+     box-sizing: border-box;
+     text-align: center;
+ }
+ 
+ .batch-name {
+     font-size: 25px;
+     font-family: sans-serif;
+     font-weight: 600;
+     color: gray;
+     margin-top: 0;
+ }
+ 
+ .student-table {
+     width: 100%;
+     border-collapse: collapse;
+     margin-top: 20px;
+ }
+ 
+ .student-table .student-head {
+     background-color: gray;
+ }
+ 
+ th,
+ td {
+     text-align: center;
+     padding: 10px;
+     border: 2px solid black;
+ }
+ 
+ th {
+     color: white;
+ }
+ 
+ .more-details-container {
+     padding: 10px 3%;
+     display: none;
+ }
+ 
+ .course-table {
+     width: 100%;
+     border-collapse: collapse;
+     margin-top: 20px;
+ }
+ 
+ .course-table thead {
+     background-color: rgb(234, 197, 143);
+ }
+ 
+ .st-interview-table {
+     width: 100%;
+     border-collapse: collapse;
+     margin-top: 20px;
+ }
+ 
+ .st-interview-table thead {
+     background-color: rgb(234, 197, 143);
+ }
+ /* background-color: plum; 
+ background-color: rgb(234, 197, 143);*/

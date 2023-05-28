@@ -1,0 +1,49 @@
+<div class="studentList-container">
+
+    <span class="batch-name"><%=batch.name%></span>
+    <table class="student-table">
+        <thead class="student-head">
+            <tr>
+                <th>Id </th>
+                <th>Name</th>
+                <th>College</th>
+                <th>Other Option</th>
+            </tr>
+        </thead>
+
+        <tbody class="student-body" id="<%=batch.id%>">
+            <%for(student of batch.students){%>
+                <tr id="<%= student.id%>">
+                    <td>
+                        <%=student.studentId%>
+                    </td>
+
+                    <td>
+                        <%=student.name%>
+                    </td>
+
+                    <td>
+                        <%=student.college%>
+                    </td>
+
+                    <td>
+                        <button onclick="viewBatchStudents('<%=student.id%>')">View</button>
+                        <%if(locals.user && locals.user.id==student.user._id){%>
+                            <button class="detail-btn" onclick="deleteStudents('<%=student.id%>','<%=batch.id%>')">Delete</button>
+                            <%}%>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="more-details-container">
+                        <!----------------------------Course table----------------------------------->
+                        <!------------------------Interview List--------------------------------->
+                    </td>
+                </tr>
+                <%}%>
+        </tbody>
+    </table>
+
+
+
+</div>

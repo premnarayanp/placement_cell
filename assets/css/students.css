@@ -1,0 +1,34 @@
+ #students-container {
+     width: 100%;
+     padding: 0;
+     padding-top: 20px;
+     padding-left: 0;
+     box-sizing: border-box;
+     text-align: center;
+     margin: 0;
+ }
+ 
+ #students-container .studentList-container {
+     padding-left: 0;
+ }
+ 
+ #students-container .batch-name {
+     margin-top: 0;
+ }
+ 
+ #students-container .forms {
+     margin-bottom: 0;
+     margin-top: 0;
+ }
+ 
+ .forms select {
+     border: 1px solid rgba(0, 0, 0, 0.12);
+     box-sizing: border-box;
+     border-radius: 10px;
+     width: 100%;
+     height: 40px;
+     margin-top: 20px;
+     padding: 5px;
+     font-size: 15px;
+     font-weight: 300;
+ }
