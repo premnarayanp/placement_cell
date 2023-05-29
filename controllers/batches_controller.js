@@ -1,5 +1,6 @@
 const Batch = require('../models/batch');
 const LastIndexCounter = require("../models/lastIndexCounter");
+const Student = require('../models/student');
 
 //create Batches
 module.exports.create = async function(req, res) {
@@ -25,7 +26,8 @@ module.exports.create = async function(req, res) {
             const batch = await Batch.create({
                 batchId: lastIndexCounter.lastIndexOfBatch + 1,
                 name: req.body.name,
-                user: req.user.id
+                user: req.user.id,
+                studentsCount: 0
             });
 
             lastIndexCounter.lastIndexOfBatch = lastIndexCounter.lastIndexOfBatch + 1;
@@ -62,7 +64,7 @@ module.exports.delete = async function(req, res) {
         let batch = await Batch.findById(req.params.id);
         if (batch && batch.user == req.user.id) {
             await Batch.findByIdAndRemove(req.params.id);
-            // await Batch.deleteOne({ "_id": ObjectId(req.params.id) });
+            await Student.deleteMany({ batch: req.params.id });
             return res.send({ success: true, message: "Batch Deleted Successfully" });
         } else {
             return res.send({ success: false, message: "You can not delate this Batch" });

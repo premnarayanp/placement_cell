@@ -15,7 +15,12 @@ const batchSchema = new mongoose.Schema({
     students: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Student'
-    }]
+    }],
+
+    studentsCount: {
+        type: Number,
+        // required: true, 
+    }
 
 }, {
     timestamps: true

@@ -61,12 +61,13 @@ module.exports.create = async function(req, res) {
                 batch: req.body.batch
             });
 
-            console.log("=======create student=========", student);
+            //console.log("=======create student=========", student);
 
             lastIndexCounter.lastIndexOfStudents = lastIndexCounter.lastIndexOfStudents + 1;
-            await lastIndexCounter.save();
+            lastIndexCounter.save();
 
             batch.students.push(student);
+            batch.studentsCount = batch.studentsCount + 1;
             batch.save();
 
             results.success = true;
@@ -86,18 +87,20 @@ module.exports.create = async function(req, res) {
 //delete students
 module.exports.delete = async function(req, res) {
     //console.log(req.params.id);
-    console.log("========req.params.id============", req.params.id);
+    //console.log("========req.params.id============", req.params.id);
 
     try {
         let student = await Student.findById(req.params.id);
-        console.log("===============student====================", student);
+        //console.log("===============student====================", student);
 
         if (student && student.user == req.user.id) {
             let batchId = student.batch;
             await Student.findByIdAndRemove(req.params.id);
-            let batch = Batch.findByIdAndUpdate(batchId, {
-                $pull: { students: req.params.id }
+            let batch = await Batch.findByIdAndUpdate(batchId, {
+                $pull: { students: req.params.id },
             });
+            batch.studentsCount = batch.studentsCount - 1;
+            batch.save();
             return res.send({ success: true, message: "Student Deleted Successfully" });
 
         } else {
