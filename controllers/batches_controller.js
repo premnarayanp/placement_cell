@@ -2,6 +2,33 @@ const Batch = require('../models/batch');
 const LastIndexCounter = require("../models/lastIndexCounter");
 const Student = require('../models/student');
 
+module.exports.batches = async(req, res) => {
+    // if (req.isAuthenticated()) {
+    if (req.user.id == req.params.id) {
+        try {
+            const batches = await Batch.find({ user: req.params.id }).populate('user');
+            return res.render('batches', {
+                title: 'batches',
+                heading: 'this is batches',
+                batches: batches
+            });
+
+        } catch (error) {
+            console.log('error in finding batch');
+
+        }
+
+        // return res.render('home', {
+        //     title: 'home',
+        //     heading: 'this is home',
+        // });
+    }
+    return res.redirect('/users/sign-in');
+
+
+}
+
+
 //create Batches
 module.exports.create = async function(req, res) {
     const results = {};
@@ -32,9 +59,10 @@ module.exports.create = async function(req, res) {
 
             lastIndexCounter.lastIndexOfBatch = lastIndexCounter.lastIndexOfBatch + 1;
             await lastIndexCounter.save();
-
             results.success = true;
-            results.data = { batch: batch };
+
+            results.data = { batch: batch, author: req.user.name };
+            // console.log("========req.user.name===========", req.user.name);
             return res.send(results);
         } else {
             results.success = false;

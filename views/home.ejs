@@ -1,25 +1,9 @@
 <div id="home-container">
 
-    <%if(!locals.user){%>
+    <%- include('_batch'); %>
 
-
-        <%}else{%>
-
-            <%}%>
-
-
-                <form class="forms" onsubmit="createBatch(event)">
-                    <span class='formsHeader'>Batch Form</span>
-
-                    <div class="field">
-                        <input type="text" id="batchName" name="name" placeholder="Enter Batch Name" required>
-                    </div>
-
-                    <div class="field">
-                        <button type="submit"> Create Batch </button>
-                    </div>
-                </form>
-
-                <%- include('_batch'); %>
+        <%for( batch of locals.batches){%>
+            <%- include('_students'); %>
+                <%}%>
 
 </div>

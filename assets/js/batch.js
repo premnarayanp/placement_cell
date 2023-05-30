@@ -24,7 +24,7 @@ async function createBatch(e) {
         const data = jsonData.data;
         console.log(data);
         if (jsonData.success) {
-            appendBatchInTable(data.batch);
+            appendBatchInTable({...data.batch, author: data.author });
         } else {
             return;
         }
@@ -41,12 +41,14 @@ function appendBatchInTable(data) {
     let tr = document.createElement('tr');
     let batchID = document.createElement('td');
     let batchName = document.createElement('td');
+    let author = document.createElement('td');
     let studentNum = document.createElement('td');
     let actionBtn = document.createElement('td');
 
     tr.id = data._id;
     batchID.innerText = data.batchId;
     batchName.innerText = data.name;
+    author.innerText = data.author;
     studentNum.innerText = data.students.length;
     //console.log("data.id=", data._id);
     actionBtn.innerHTML = `<button onclick="viewBatchStudents(event,'${data._id}')">View</button>
@@ -54,6 +56,7 @@ function appendBatchInTable(data) {
 
     tr.appendChild(batchID);
     tr.appendChild(batchName);
+    tr.appendChild(author);
     tr.appendChild(studentNum);
     tr.appendChild(actionBtn);
     batchTableBody.appendChild(tr);

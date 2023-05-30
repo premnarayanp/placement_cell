@@ -3,9 +3,10 @@
     <table class="batch-table" id="batchTable">
         <thead>
             <tr>
-                <th>BatchID</th>
-                <th>Batch Name</th>
-                <th>Total Students</th>
+                <th>ID</th>
+                <th> Batch Name</th>
+                <th>Author</th>
+                <th>Students</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -20,6 +21,10 @@
                         </td>
                         <td>
                             <%= batch.name%>
+                        </td>
+
+                        <td>
+                            <%= batch.user.name%>
                         </td>
                         <td>
                             <%= batch.studentsCount%>

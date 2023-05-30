@@ -11,12 +11,12 @@
     width: 100%;
     box-sizing: border-box;
     padding: 0 10%;
+    margin-top: 20px;
 }
 
 .batch-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
 }
 
 .batch-table thead {

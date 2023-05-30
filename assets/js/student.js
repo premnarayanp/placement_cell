@@ -45,17 +45,20 @@ function appendStudentInTable(data) {
     let studentID = document.createElement('td');
     let studentName = document.createElement('td');
     let studentCollege = document.createElement('td');
+    let status = document.createElement('td');
     let actionBtn = document.createElement('td');
 
     tr.id = data._id;
     studentID.innerText = data.studentId;
     studentName.innerText = data.name;
     studentCollege.innerText = data.college;
+    status.innerText = data.status;
     actionBtn.innerHTML = `<button onclick="viewBatchStudents('${data._id}','${data._id}')">View</button>
                             <button onclick="deleteStudents('${data._id}','${data.batch}')">Delete</button>`;
     tr.appendChild(studentID);
     tr.appendChild(studentName);
     tr.appendChild(studentCollege);
+    tr.appendChild(status);
     tr.appendChild(actionBtn);
     studentTableBody.appendChild(tr);
 }

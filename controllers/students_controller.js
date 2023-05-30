@@ -8,7 +8,7 @@ module.exports.students = async function(req, res) {
 
     try {
 
-        const batches = await Batch.find({})
+        const batches = await Batch.find({ user: req.user.id })
             .populate('user')
             .populate({
                 path: 'students',
@@ -57,6 +57,7 @@ module.exports.create = async function(req, res) {
                 studentId: studentId,
                 name: req.body.name,
                 college: req.body.college,
+                status: "Not Placed",
                 user: req.user.id,
                 batch: req.body.batch
             });

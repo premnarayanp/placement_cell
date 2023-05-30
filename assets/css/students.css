@@ -8,17 +8,29 @@
      margin: 0;
  }
  
- #students-container .studentList-container {
-     padding-left: 0;
- }
- 
- #students-container .batch-name {
+ #form-container {
+     box-sizing: border-box;
+     width: 100%;
+     display: flex;
+     background-color: white;
+     justify-content: space-between;
+     flex-wrap: wrap;
      margin-top: 0;
  }
  
- #students-container .forms {
+ #form-container .forms {
      margin-bottom: 0;
-     margin-top: 0;
+     margin-top: 10px;
+ }
+ 
+ .forms .field {
+     margin-top: 10px;
+     padding: 0;
+ }
+ 
+ .forms .field input {
+     height: 30px;
+     margin: 0;
  }
  
  .forms select {
@@ -26,9 +38,17 @@
      box-sizing: border-box;
      border-radius: 10px;
      width: 100%;
-     height: 40px;
-     margin-top: 20px;
+     height: 30px;
+     /* margin-top: 20px; */
      padding: 5px;
      font-size: 15px;
      font-weight: 300;
+ }
+ 
+ #students-container .studentList-container {
+     padding-left: 0;
+ }
+ 
+ #students-container .batch-name {
+     margin-top: 0;
  }

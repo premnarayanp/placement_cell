@@ -8,4 +8,6 @@ router.get('/', homeController.home);
 router.use('/users', require('./users'));
 router.use('/batches', require('./batches'));
 router.use('/students', require('./students'));
+router.use('/courses', require('./courses'));
+router.use('/interviews', require('./interviews'));
 module.exports = router;

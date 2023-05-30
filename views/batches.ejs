@@ -1,0 +1,16 @@
+<div id="batches-container">
+    <form class="forms" onsubmit="createBatch(event)">
+        <span class='formsHeader'>Batch Form</span>
+
+        <div class="field">
+            <input type="text" id="batchName" name="name" placeholder="Enter Batch Name" required>
+        </div>
+
+        <div class="field">
+            <button type="submit"> Create Batch </button>
+        </div>
+    </form>
+
+    <%- include('_batch'); %>
+
+</div>
