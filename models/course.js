@@ -16,6 +16,11 @@ const courseSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Student'
     },
+
+    // batch: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Batch'
+    // },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

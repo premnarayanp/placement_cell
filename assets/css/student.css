@@ -46,7 +46,7 @@
  
  .more-details-container {
      padding: 10px 3%;
-     display: none;
+     /* display: none; */
  }
  
  .course-table {

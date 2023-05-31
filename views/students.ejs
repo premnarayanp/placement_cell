@@ -47,34 +47,19 @@
             </div>
 
             <div class="field">
-                <select id="batches" name="student">
+                <select id="batches-selector" name="student">
                 
               <option>Select Student</option>
                <%for( batch of locals.batches){%>
-                <% if(batch.students.length==0){%>
-                       <% continue;%>
-                    <%}%>
-                <optgroup label="<%=batch.name%>">
+                
+                <optgroup id="<%=batch.id+'optgroup'%>" label="<%=batch.name%>">
                     <%for(index in batch.students){%>
                         <%let student=batch.students[index] %>
-                        <option value="<%=student._id%>"><%=student.name%></option>
+                           <option id="<%=student._id+'option'%>"  value="<%=student._id%>"><%=student.name%></option>
                         <%}%>
                 </optgroup>
                <%}%>
-           </select>
-            </div>
-
-            <div class="field">
-                <select id="students" name="batch">
-                
-              <option>Select Batch</option>
-               <%for( batch of locals.batches){%>
-                <%if(batch.user.id==locals.user.id){%>
-                    <option value="<%=batch._id%>"><%=batch.name%></option>
-                    <%}%>
-                  
-               <%}%>
-           </select>
+              </select>
             </div>
 
             <div class="field">

@@ -1,6 +1,7 @@
 const LastIndexCounter = require("../models/lastIndexCounter");
 const Batch = require('../models/batch');
 const Student = require('../models/student');
+const Course = require('../models/course');
 //create Students
 
 //find all students according batchWise
@@ -16,7 +17,6 @@ module.exports.students = async function(req, res) {
                     path: 'user'
                 }
             });
-
 
         return res.render('students', {
             title: 'Students',
@@ -111,6 +111,36 @@ module.exports.delete = async function(req, res) {
     } catch (error) {
         console.log('error in deleting a comments', error);
         return res.send({ success: false, message: "Error while deleting this Student" });
+    }
+
+}
+
+module.exports.details = async function(req, res) {
+    try {
+
+        console.log("=========req.params.id============", req.params.id);
+        // const student = await Student.findById(req.params.id)
+        //     .populate('user')
+        //     .populate({
+        //         path: 'students',
+        //         populate: {
+        //             path: 'user'
+        //         }
+        //     });
+
+        const course = await Course.findOne({ student: req.params.id })
+        if (course) {
+            return res.send({ success: true, data: { course: course }, message: "Successfully detail founded" });
+        } else {
+            course.scoreDSA = "__";
+            course.scoreWebD = "__";
+            course.scoreReact = "__";
+            return res.send({ success: false, data: { course: course }, message: "Not Assign Course Score" });
+        }
+
+    } catch (error) {
+        console.log('error in finding students');
+        return res.send({ success: false, message: "Error to find this course" });
     }
 
 }

@@ -32,7 +32,7 @@
                     </td>
 
                     <td>
-                        <button onclick="viewBatchStudents('<%=student.id%>')">View</button>
+                        <button onclick="viewStudentDetail('<%=student.id%>')">View</button>
                         <%if(locals.user && locals.user.id==student.user._id){%>
                             <button class="detail-btn" onclick="deleteStudents('<%=student.id%>','<%=batch.id%>')">Delete</button>
                             <%}%>
@@ -40,7 +40,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="more-details-container">
+                    <td colspan="5" class="more-details-container" id="<%= student.id+'details'%>">
                         <!----------------------------Course table----------------------------------->
                         <!------------------------Interview List--------------------------------->
                     </td>
