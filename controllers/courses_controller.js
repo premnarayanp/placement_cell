@@ -49,3 +49,27 @@ module.exports.create = async function(req, res) {
         return res.send(results);
     }
 }
+
+
+module.exports.update = async function(req, res) {
+    console.log("======req body==============", req.body);
+
+    try {
+        const course = await Course.findById(req.params.id);
+
+        let body = req.body;
+
+        if (course && req.user.id == course.user) {
+            course.scoreDSA = body.scoreDSA,
+                course.scoreWebD = body.scoreWebD,
+                course.scoreReact = body.scoreReact,
+                course.save();
+            return res.send({ success: true, data: { course: course }, message: "Successfully  course score updated" });
+        } else {
+            return res.send({ success: false, data: { course: course }, message: "You can not update of this  course Score" });
+        }
+
+    } catch (error) {
+        return res.send({ success: false, message: "Error in finding/updating  course" });
+    }
+}

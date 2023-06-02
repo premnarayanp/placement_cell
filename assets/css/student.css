@@ -38,8 +38,8 @@
  }
  
  .course-table {
-     margin: 10px auto;
-     width: 90%;
+     margin: auto;
+     width: 95%;
      border-collapse: collapse;
      margin-top: 20px;
  }
@@ -47,13 +47,14 @@
  .course-table thead {
      background-color: rgb(234, 197, 143);
  }
- /* .st-interview-table {
-     width: 100%;
+ 
+ .studentInterviews-table {
+     margin: 10px auto;
+     width: 95%;
      border-collapse: collapse;
-     margin-top: 20px;
+     margin-top: 30px;
  }
  
- .st-interview-table thead {
+ .studentInterviews-table thead {
      background-color: rgb(234, 197, 143);
  }
-  */

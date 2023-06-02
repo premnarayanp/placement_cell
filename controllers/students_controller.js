@@ -115,24 +115,29 @@ module.exports.delete = async function(req, res) {
 
 }
 
+
 module.exports.details = async function(req, res) {
     try {
 
         console.log("=========req.params.id============", req.params.id);
-        // const student = await Student.findById(req.params.id)
-        //     .populate('user')
-        //     .populate({
-        //         path: 'students',
-        //         populate: {
-        //             path: 'user'
-        //         }
-        //     });
+        const student = await Student.findById(req.params.id)
+            .populate('course')
+            .populate({
+                path: 'interviewList',
+                populate: [{
+                    path: 'interview',
+                    model: 'Interview'
+                }, {
+                    path: 'result',
+                    model: 'Result'
+                }]
+            })
 
-        const course = await Course.findOne({ student: req.params.id })
-        if (course) {
-            return res.send({ success: true, data: { course: course }, message: "Successfully detail founded" });
+        // const student = await Student.findById(req.params.id)
+        if (student) {
+            return res.send({ success: true, data: { student: student }, message: "Successfully detail founded" });
         } else {
-            return res.send({ success: false, message: "Not Assign Course Score", error: false });
+            return res.send({ success: false, message: "Not found more details", error: false });
         }
 
     } catch (error) {
@@ -141,3 +146,31 @@ module.exports.details = async function(req, res) {
     }
 
 }
+
+
+// module.exports.details = async function(req, res) {
+//     try {
+
+//         console.log("=========req.params.id============", req.params.id);
+//         // const student = await Student.findById(req.params.id)
+//         //     .populate('user')
+//         //     .populate({
+//         //         path: 'students',
+//         //         populate: {
+//         //             path: 'user'
+//         //         }
+//         //     });
+
+//         const course = await Course.findOne({ student: req.params.id })
+//         if (course) {
+//             return res.send({ success: true, data: { course: course }, message: "Successfully detail founded" });
+//         } else {
+//             return res.send({ success: false, message: "Not Assign Course Score", error: false });
+//         }
+
+//     } catch (error) {
+//         console.log('error in finding students');
+//         return res.send({ success: false, message: "Error to find this course", error: true });
+//     }
+
+// }

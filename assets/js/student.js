@@ -128,12 +128,14 @@ async function viewStudentDetail(studentId) {
         const data = jsonData.data;
 
         if (jsonData.success) {
-            // const data = jsonData.data;
-            console.log("======= Students more details Successfully get=======", data);
-            showMoreDetails(data.course);
+            console.log("======= Students more details Successfully get=======", data.student);
+            const student = data.student;
+            showCourseScore(student.course);
+            showInterviewList(student.interviewList, student._id);
+
         } else if (!jsonData.error) {
             console.log(jsonData.message);
-            showMoreDetails({ scoreDSA: "__", scoreWebD: "__", scoreReact: "__", student: studentId });
+            // showCourseScore({ scoreDSA: "__", scoreWebD: "__", scoreReact: "__", student: studentId });
         }
 
     } catch (error) {
@@ -142,7 +144,7 @@ async function viewStudentDetail(studentId) {
     }
 }
 
-function showMoreDetails(course) {
+function showCourseScore(course) {
     //let studentMoreDetailContainerRow = document.getElementById(course.student + 'row');
     let studentMoreDetailContainer = document.getElementById(course.student + 'details');
 
@@ -159,14 +161,14 @@ function showMoreDetails(course) {
          <th>DSA Score</th>
          <th>WebD Score</th>
          <th>React Score</th>
-         <th>Action</th>
+       <!--  <th>Action</th>-->
       </tr>`
 
     tBody.innerHTML = `<tr>
              <td>${course.scoreDSA}</td>
              <td>${course.scoreWebD}</td>
              <td>${course.scoreReact}</td>
-             <td><button>update</button></td>
+            <!-- <td><button  onclick="updateCourseScore(event,'${course._id}')">update</button></td>-->
            </tr>`;
 
     courseTable.appendChild(tHead);
@@ -177,6 +179,61 @@ function showMoreDetails(course) {
         // studentMoreDetailContainerRow.style = "display: table-row;"
 }
 
+function showInterviewList(interviewList, studentID) {
+
+    let studentMoreDetailContainer = document.getElementById(studentID + 'details');
+
+    let studentInterviewTable = document.createElement('table');
+    let tHead = document.createElement('thead');
+    let tBody = document.createElement('tbody');
+
+
+    studentInterviewTable.className = "studentInterviews-table";
+    tHead.className = "studentInterviews-head";
+    tBody.className = "studentInterviews-body";
+
+    tHead.innerHTML = `<tr>
+        <!-- <th rowspan="2">Interview</th>-->
+        <th colspan="2">Interview</th>
+         <th colspan="4">Results</th>
+         <th rowspan="2">Action</th>
+      </tr>
+
+      <tr>
+         <th>company</th>
+         <th>date</th>
+         <th>pass</th>
+         <th>fail</th>
+         <th>onHold</th>
+         <th>DoNot Attempt</th>
+      </tr>`;
+
+    for (let i = 0; i < interviewList.length; i++) {
+        let results = interviewList[i].result;
+        let interview = interviewList[i].interview;
+        let tr = document.createElement('tr');
+
+        tr.innerHTML = `
+        <td>${interview.company} </td>
+        <td>${interview.date} </td>
+        <td><input type="checkbox" id='${results._id +'pass'}'         ${results.pass?'checked':''}/></td>
+        <td><input type="checkbox" id='${results._id +'fail'}'         ${results.fail?'checked':''}/></td>
+        <td><input type="checkbox" id='${results._id +'onHold'}'       ${results.onHold?'checked':''}/></td>
+        <td><input type="checkbox" id='${results._id +'doNotAttempt'}' ${results.doNotAttempt?'checked':''}/></td>
+        <td><button onclick="updateResults(event,'${results._id}')">update</button></td>`;
+        tBody.appendChild(tr);
+    }
+
+
+    studentInterviewTable.appendChild(tHead);
+    studentInterviewTable.appendChild(tBody);
+    // studentMoreDetailContainer.innerHTML = "";
+    studentMoreDetailContainer.appendChild(studentInterviewTable);
+    studentMoreDetailContainer.style = " display: table-cell;";
+
+}
+
+//
 document.addEventListener('click', (e) => {
     const target = e.target;
     if (target.className == "more-details-container") {
@@ -185,3 +242,38 @@ document.addEventListener('click', (e) => {
         document.getElementById(rowId).style = "display: none;";
     }
 });
+
+// async function updateCourseScore(e, courseId) {
+//     const URL = `http://localhost:8394/courses/update/${courseId}`;
+//     //e.preventDefault();
+
+//     try {
+//         const response = await fetch(URL, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/x-www-form-urlencoded'
+//             },
+//             body: new URLSearchParams(course)
+//         });
+
+
+//         console.log("response ", response);
+//         const jsonData = await response.json();
+//         const data = jsonData.data;
+//         console.log("data=", data);
+//         if (jsonData.success) {
+//             target.innerText = "updated";
+//             target.style = "background-color:pink"
+
+//         } else {
+//             console.log(jsonData.message);
+//             target.innerText = "update";
+//             target.style = "background-color:gray"
+//             return;
+//         }
+//     } catch (error) {
+//         console.log("error=", error);
+//         return;
+//     }
+
+// }
