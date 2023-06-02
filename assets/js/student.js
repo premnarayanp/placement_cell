@@ -94,7 +94,7 @@ async function deleteStudents(id, batchId) {
             return;
         }
     } catch (error) {
-        console.log("====message=error=======");
+        console.log("====message=error=======", error);
         return;
     }
 
@@ -104,7 +104,9 @@ async function deleteStudents(id, batchId) {
 function removeStudentFromTable(id, batchId) {
     let studentTableBody = document.getElementById(batchId);
     let removAbleRow = document.getElementById(id);
+    let studentMoreDetailRow = document.getElementById(id + 'row');
     studentTableBody.removeChild(removAbleRow);
+    studentTableBody.removeChild(studentMoreDetailRow);
     //return;
 }
 
@@ -128,11 +130,12 @@ async function viewStudentDetail(studentId) {
         if (jsonData.success) {
             // const data = jsonData.data;
             console.log("======= Students more details Successfully get=======", data);
-        } else {
+            showMoreDetails(data.course);
+        } else if (!jsonData.error) {
             console.log(jsonData.message);
+            showMoreDetails({ scoreDSA: "__", scoreWebD: "__", scoreReact: "__", student: studentId });
         }
 
-        showMoreDetails(data.course);
     } catch (error) {
         console.log("error=", error);
         return;
@@ -140,11 +143,13 @@ async function viewStudentDetail(studentId) {
 }
 
 function showMoreDetails(course) {
+    //let studentMoreDetailContainerRow = document.getElementById(course.student + 'row');
     let studentMoreDetailContainer = document.getElementById(course.student + 'details');
 
     let courseTable = document.createElement('table');
     let tHead = document.createElement('thead');
     let tBody = document.createElement('tbody');
+
 
     courseTable.className = "course-table";
     tHead.className = "course-head";
@@ -161,11 +166,22 @@ function showMoreDetails(course) {
              <td>${course.scoreDSA}</td>
              <td>${course.scoreWebD}</td>
              <td>${course.scoreReact}</td>
-             <td><button>delete</button></td>
+             <td><button>update</button></td>
            </tr>`;
 
     courseTable.appendChild(tHead);
     courseTable.appendChild(tBody);
     studentMoreDetailContainer.innerHTML = "";
     studentMoreDetailContainer.appendChild(courseTable);
+    studentMoreDetailContainer.style = " display: table-cell;"
+        // studentMoreDetailContainerRow.style = "display: table-row;"
 }
+
+document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (target.className == "more-details-container") {
+        let rowId = target.id;
+        console.log(rowId);
+        document.getElementById(rowId).style = "display: none;";
+    }
+});

@@ -28,15 +28,14 @@ const studentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Course'
     },
-    placement: [{
+    interviewList: [{
         interview: {
             type: mongoose.Schema.Types.ObjectId,
-
             ref: 'Interview'
         },
         result: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Results'
+            ref: 'Result'
         }
     }]
 

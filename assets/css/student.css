@@ -7,20 +7,6 @@
      text-align: center;
  }
  
- .batch-name {
-     /* font-size: 20px;
-     font-family: sans-serif;
-     font-weight: 800;
-     color: gray;
-     margin-top: 0; */
-     font-size: 20px;
-     text-align: center;
-     font-weight: 800;
-     line-height: 0;
-     color: gray;
-     margin: 0;
- }
- 
  .student-table {
      width: 100%;
      border-collapse: collapse;
@@ -29,28 +15,31 @@
      margin: 0;
  }
  
- .student-table .student-head {
+ .student-table thead {
      background-color: gray;
  }
  
- th,
- td {
+ .student-table thead th {
      text-align: center;
+     padding: 10px;
+     border: 2px solid black;
+     color: white;
+ }
+ 
+ .student-table tbody td {
+     text-align: start;
      padding: 10px;
      border: 2px solid black;
  }
  
- th {
-     color: white;
- }
- 
  .more-details-container {
-     padding: 10px 3%;
-     /* display: none; */
+     display: none;
+     cursor: pointer;
  }
  
  .course-table {
-     width: 100%;
+     margin: 10px auto;
+     width: 90%;
      border-collapse: collapse;
      margin-top: 20px;
  }
@@ -58,8 +47,7 @@
  .course-table thead {
      background-color: rgb(234, 197, 143);
  }
- 
- .st-interview-table {
+ /* .st-interview-table {
      width: 100%;
      border-collapse: collapse;
      margin-top: 20px;
@@ -68,5 +56,4 @@
  .st-interview-table thead {
      background-color: rgb(234, 197, 143);
  }
- /* background-color: plum; 
- background-color: rgb(234, 197, 143);*/
+  */

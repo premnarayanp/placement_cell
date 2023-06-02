@@ -1,0 +1,60 @@
+<div id="interviews-container" class="page-container">
+    <div class="form-container">
+
+        <form class="forms" id="interview-form" onsubmit="return createInterview(event)">
+            <span class='formsHeader'>interviews Form</span>
+
+            <div class="field">
+                <input type="text" name="company" placeholder="Enter Company Name" required>
+            </div>
+
+            <div class="field">
+                <input type="date" name="date" placeholder="Select Date" required>
+            </div>
+
+            <div class="field">
+                <button type="submit"> Create Interview </button>
+            </div>
+        </form>
+
+
+
+        <form class="forms" id="interview-initializer" onsubmit="return assignInterviewToStudents(event)">
+            <span class='formsHeader'>Assign Interview form</span>
+
+            <div class="field">
+                <select id="interview-selector" name="interview">
+                 <option>Select Interview</option>
+               <%for( interview of locals.interviews){%>
+                    <option value="<%=interview._id%>"  id="<%=interview._id +'option'%>" ><%=interview.company%></option>
+               <%}%>
+              </select>
+            </div>
+
+
+            <div class="field">
+                <select id="students-selector" name="student">
+                    <option>Select Select Students</option>
+               <%for( batch of locals.batches){%>
+                
+                <optgroup id="<%=batch.id+'optgroup'%>" label="<%=batch.name%>">
+                    <%for(index in batch.students){%>
+                        <%let student=batch.students[index] %>
+                           <option id="<%=student._id+'option'%>"  value="<%=student._id%>"><%=student.name%></option>
+                        <%}%>
+                </optgroup>
+               <%}%>
+              </select>
+            </div>
+
+            <div class="field">
+                <button type="submit">Submit Score</button>
+            </div>
+        </form>
+
+    </div>
+
+    <%- include('_interview'); %>
+
+        <script src="/js/interview.js"></script>
+</div>

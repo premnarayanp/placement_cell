@@ -1,0 +1,60 @@
+.page-container {
+    width: 100%;
+    padding: 0;
+    padding-top: 10px;
+    margin: 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+
+/* #batches-container {
+    width: 100%;
+    padding: 0;
+    padding-top: 10px;
+    margin: 0;
+    box-sizing: border-box;
+    text-align: center;
+} */
+
+
+/* #students-container {
+    width: 100%;
+    padding: 0;
+    padding-top: 15px;
+    padding-left: 0;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 0;
+} */
+
+
+/* #interview-form-container {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 0;
+} */
+
+
+/* #student-form-container {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 0;
+}  */
+
+
+/* #students-container .studentList-container {
+    padding-left: 0;
+}
+
+#students-container .batch-name {
+    margin-top: 0;
+} */

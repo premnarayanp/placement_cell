@@ -1,0 +1,53 @@
+<div class="interviewList-container">
+    <span class="interview-heading">Interviews</span>
+    <table class="interview-table" id="interviewhTable">
+        <thead>
+            <tr>
+                <th>company</th>
+                <th>date</th>
+                <th>Students</th>
+                <!-- <th>Action</th> -->
+            </tr>
+        </thead>
+
+        <tbody id="interviewTableBody">
+
+            <%for(index in locals.interviews){%>
+                <%let interview=locals.interviews[index] %>
+                    <tr id="<%= interview._id%>" class="trEffect" onclick="viewAssignedStudents('<%=interview.id%>')">
+                        <td>
+                            <%= interview.company%>
+                        </td>
+                        <td>
+                            <%= interview.date%>
+                        </td>
+                        <td id="<%= interview._id +'stuNum'%>">
+                            <%= interview.numOfStudents%>
+                        </td>
+                    </tr>
+
+                    <tr id="<%= interview._id +'row'%>">
+                        <td class="more-details-container" colspan="5" id="<%= interview._id +'details'%>">
+                            <!----------------------------Course table----------------------------------->
+                            <!------------------------Interview List--------------------------------->
+                        </td>
+                    </tr>
+                    <%}%>
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
+<!--
+
+<td>
+    <button onclick="viewAssignedStudents('<=interview.id>')">View</button>
+    <if(locals.user && locals.user.id==interview.user){>
+        <button onclick="deleteInterview('<=interview.id>')">Delete</button>
+        <}>
+</td>
+
+-->

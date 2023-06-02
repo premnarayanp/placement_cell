@@ -9,5 +9,5 @@ router.use('/users', require('./users'));
 router.use('/batches', require('./batches'));
 router.use('/students', require('./students'));
 router.use('/courses', require('./courses'));
-router.use('/interviews', require('./interviews'));
+router.use('/interviews', require('./interviews')); //interviews route
 module.exports = router;

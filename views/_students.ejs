@@ -1,8 +1,7 @@
 <div class="studentList-container">
-
-    <span class="batch-name"><%=batch.name%></span>
+    <span class="batch-heading"><%=batch.name%></span>
     <table class="student-table">
-        <thead class="student-head">
+        <thead>
             <tr>
                 <th>Id </th>
                 <th>Name</th>
@@ -36,11 +35,10 @@
                         <%if(locals.user && locals.user.id==student.user._id){%>
                             <button class="detail-btn" onclick="deleteStudents('<%=student.id%>','<%=batch.id%>')">Delete</button>
                             <%}%>
-
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="5" class="more-details-container" id="<%= student.id+'details'%>">
+                <tr id="<%= student.id+'row'%>">
+                    <td class="more-details-container" colspan="5" id="<%= student.id+'details'%>">
                         <!----------------------------Course table----------------------------------->
                         <!------------------------Interview List--------------------------------->
                     </td>

@@ -1,0 +1,63 @@
+.interview-heading {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 700;
+    line-height: 0;
+    color: gray;
+    margin: 0;
+}
+
+.interviewList-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.interview-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+.interview-table thead {
+    background-color: gray;
+}
+
+.interview-table thead th {
+    text-align: center;
+    padding: 10px;
+    border: 2px solid black;
+    color: white;
+}
+
+.interview-table tbody td {
+    text-align: start;
+    padding: 10px;
+    border: 2px solid black;
+}
+
+#interviewTableBody .trEffect:hover {
+    background-color: pink;
+    cursor: pointer;
+}
+
+
+/* .more-details-container {
+    display: none;
+    cursor: pointer;
+} */
+
+.assignStudent-table {
+    margin: 10px auto;
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.assignStudent-table thead {
+    background-color: rgb(234, 197, 143);
+}

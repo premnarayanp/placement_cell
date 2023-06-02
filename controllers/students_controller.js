@@ -132,15 +132,12 @@ module.exports.details = async function(req, res) {
         if (course) {
             return res.send({ success: true, data: { course: course }, message: "Successfully detail founded" });
         } else {
-            course.scoreDSA = "__";
-            course.scoreWebD = "__";
-            course.scoreReact = "__";
-            return res.send({ success: false, data: { course: course }, message: "Not Assign Course Score" });
+            return res.send({ success: false, message: "Not Assign Course Score", error: false });
         }
 
     } catch (error) {
         console.log('error in finding students');
-        return res.send({ success: false, message: "Error to find this course" });
+        return res.send({ success: false, message: "Error to find this course", error: true });
     }
 
 }

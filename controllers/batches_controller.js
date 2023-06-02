@@ -40,6 +40,7 @@ module.exports.create = async function(req, res) {
 
     try {
         const batch = await Batch.findOne({ name: req.body.name });
+        console.log("=========batch===========", batch);
         if (!batch) {
             const lastIndexCounter = await LastIndexCounter.findOne({});
             if (lastIndexCounter == null) {
