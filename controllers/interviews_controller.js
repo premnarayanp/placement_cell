@@ -161,15 +161,6 @@ module.exports.details = async function(req, res) {
     try {
 
         console.log("=========req.params.id============", req.params.id);
-        // const student = await Student.findById(req.params.id)
-        //     .populate('user')
-        //     .populate({
-        //         path: 'students',
-        //         populate: {
-        //             path: 'user'
-        //         }
-        //     });
-
         const interview = await Interview.findById(req.params.id)
             .populate({
                 path: 'assignedStudentList',
@@ -181,8 +172,6 @@ module.exports.details = async function(req, res) {
                     model: 'Result'
                 }]
             })
-
-
 
 
         if (interview) {

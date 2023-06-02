@@ -123,7 +123,7 @@ async function viewAssignedStudents(interviewId) {
         const data = jsonData.data;
 
         if (jsonData.success) {
-            //console.log("======= Students more details Successfully get=======", data);
+            console.log("======= Students more details Successfully get=======", data);
             showAssignedStudents(data.interview);
         } else {
             //console.log(jsonData.message);
@@ -167,11 +167,11 @@ function showAssignedStudents(interview) {
 
         tr.innerHTML = `
         <td>${student.name} </td>
-        <td><input type="checkbox" ${results.pass?'checked':''}/></td>
-        <td><input type="checkbox" ${results.fail?'checked':''}/></td>
-        <td><input type="checkbox" ${results.onHold?'checked':''}/></td>
-        <td><input type="checkbox" ${results.doNotAttempt?'checked':''}/></td>
-        <td><button>update</button></td>`;
+        <td><input type="checkbox" id='${results._id +'pass'}'         ${results.pass?'checked':''}/></td>
+        <td><input type="checkbox" id='${results._id +'fail'}'         ${results.fail?'checked':''}/></td>
+        <td><input type="checkbox" id='${results._id +'onHold'}'       ${results.onHold?'checked':''}/></td>
+        <td><input type="checkbox" id='${results._id +'doNotAttempt'}' ${results.doNotAttempt?'checked':''}/></td>
+        <td><button onclick="updateResults(event,'${results._id}')">update</button></td>`;
         tBody.appendChild(tr);
     }
 
@@ -184,6 +184,64 @@ function showAssignedStudents(interview) {
 }
 
 
+
+async function updateResults(e, resultsId) {
+    const URL = `http://localhost:8394/results/update/${resultsId}`;
+    //e.preventDefault();
+    const target = e.target;
+    // e.target.innerText = "up....";
+    target.innerText = "Upd.....";
+    target.style = "background-color:blue"
+
+    let pass = document.getElementById(resultsId + 'pass').checked;
+    let fail = document.getElementById(resultsId + 'fail').checked;
+    let onHold = document.getElementById(resultsId + 'onHold').checked;
+    let doNotAttempt = document.getElementById(resultsId + 'doNotAttempt').checked;
+
+    // console.log("pass=", pass.checked);
+    // console.log("fail=", fail.checked);
+    // console.log("onHold=", onHold.checked);
+    // console.log("doNotAttempt=", doNotAttempt.checked);
+
+    const results = {
+        pass: pass,
+        fail: fail,
+        onHold: onHold,
+        doNotAttempt: doNotAttempt
+    };
+
+    console.log("Data==", results);
+    //console.log("URL incoded==", new URLSearchParams(results));
+    try {
+        const response = await fetch(URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(results)
+        });
+
+
+        console.log("response ", response);
+        const jsonData = await response.json();
+        const data = jsonData.data;
+        console.log("data=", data);
+        if (jsonData.success) {
+            target.innerText = "updated";
+            target.style = "background-color:pink"
+
+        } else {
+            console.log(jsonData.message);
+            target.innerText = "update";
+            target.style = "background-color:gray"
+            return;
+        }
+    } catch (error) {
+        console.log("error=", error);
+        return;
+    }
+
+}
 
 // //Delete the interview
 // async function deleteInterview(id) {
