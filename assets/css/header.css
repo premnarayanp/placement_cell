@@ -1,9 +1,10 @@
 body #header {
-    width: 98%;
+    /* width: 98%; */
+    /* border-radius: 50px; */
+    width: 100%;
     height: 9vh;
     /* background-color: rgb(225, 208, 109); */
     background-color: rgb(234, 197, 143);
-    border-radius: 50px;
     margin: 0;
     top: 0;
     box-sizing: border-box;

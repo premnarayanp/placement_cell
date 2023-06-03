@@ -48,6 +48,11 @@
      background-color: rgb(234, 197, 143);
  }
  
+ .editable {
+     outline: none;
+     border: 0;
+ }
+ 
  .studentInterviews-table {
      margin: 10px auto;
      width: 95%;

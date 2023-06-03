@@ -16,6 +16,10 @@ const resultSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
     },
+    finalResult: {
+        type: String,
+        // required: true,
+    },
     student: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Student'

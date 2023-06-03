@@ -11,4 +11,5 @@ router.use('/students', require('./students'));
 router.use('/courses', require('./courses'));
 router.use('/interviews', require('./interviews')); //interviews route
 router.use('/results', require('./results'));
+router.use('/csv', require('./csv'));
 module.exports = router;

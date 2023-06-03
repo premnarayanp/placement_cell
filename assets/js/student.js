@@ -130,12 +130,15 @@ async function viewStudentDetail(studentId) {
         if (jsonData.success) {
             console.log("======= Students more details Successfully get=======", data.student);
             const student = data.student;
-            showCourseScore(student.course);
+            if (student.course) {
+                showCourseScore(student.course);
+            } else {
+                showCourseScore({ scoreDSA: "__", scoreWebD: "__", scoreReact: "__", student: student._id });
+            }
             showInterviewList(student.interviewList, student._id);
 
         } else if (!jsonData.error) {
             console.log(jsonData.message);
-            // showCourseScore({ scoreDSA: "__", scoreWebD: "__", scoreReact: "__", student: studentId });
         }
 
     } catch (error) {
@@ -145,6 +148,7 @@ async function viewStudentDetail(studentId) {
 }
 
 function showCourseScore(course) {
+
     //let studentMoreDetailContainerRow = document.getElementById(course.student + 'row');
     let studentMoreDetailContainer = document.getElementById(course.student + 'details');
 
@@ -161,15 +165,15 @@ function showCourseScore(course) {
          <th>DSA Score</th>
          <th>WebD Score</th>
          <th>React Score</th>
-       <!--  <th>Action</th>-->
+         <th> Action</th>
       </tr>`
 
     tBody.innerHTML = `<tr>
-             <td>${course.scoreDSA}</td>
-             <td>${course.scoreWebD}</td>
-             <td>${course.scoreReact}</td>
-            <!-- <td><button  onclick="updateCourseScore(event,'${course._id}')">update</button></td>-->
-           </tr>`;
+             <td> <input id='${course._id+'DSA'}' class='editable'  placeholder="${course.scoreDSA}"/></td>
+             <td> <input id='${course._id+'WebD'}' class='editable'  placeholder="${course.scoreWebD}"/></td>
+             <td> <input id='${course._id+'React'}' class='editable' placeholder="${course.scoreReact}"/></td>
+             <td><button  onclick="updateCourseScore(event,'${course._id}')">update</button></td>
+             </tr>`;
 
     courseTable.appendChild(tHead);
     courseTable.appendChild(tBody);
@@ -216,10 +220,10 @@ function showInterviewList(interviewList, studentID) {
         tr.innerHTML = `
         <td>${interview.company} </td>
         <td>${interview.date} </td>
-        <td><input type="checkbox" id='${results._id +'pass'}'         ${results.pass?'checked':''}/></td>
-        <td><input type="checkbox" id='${results._id +'fail'}'         ${results.fail?'checked':''}/></td>
-        <td><input type="checkbox" id='${results._id +'onHold'}'       ${results.onHold?'checked':''}/></td>
-        <td><input type="checkbox" id='${results._id +'doNotAttempt'}' ${results.doNotAttempt?'checked':''}/></td>
+        <td><input type="checkbox" id='${results._id +'pass'}' value='pass' ${results.pass?'checked':''}/></td>
+        <td><input type="checkbox" id='${results._id +'fail'}' value='fail' ${results.fail?'checked':''}/></td>
+        <td><input type="checkbox" id='${results._id +'onHold'}' value='onHold' ${results.onHold?'checked':''}/></td>
+        <td><input type="checkbox" id='${results._id +'doNotAttempt'}' value='doNotAttempt'  ${results.doNotAttempt?'checked':''}/></td>
         <td><button onclick="updateResults(event,'${results._id}')">update</button></td>`;
         tBody.appendChild(tr);
     }
@@ -243,37 +247,73 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// async function updateCourseScore(e, courseId) {
-//     const URL = `http://localhost:8394/courses/update/${courseId}`;
-//     //e.preventDefault();
+async function updateCourseScore(e, courseId) {
+    const URL = `http://localhost:8394/courses/update/${courseId}`;
+    //e.preventDefault();
+    const target = e.target;
+    target.innerText = "Upd....";
+    target.style = "background-color:blue"
 
-//     try {
-//         const response = await fetch(URL, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/x-www-form-urlencoded'
-//             },
-//             body: new URLSearchParams(course)
-//         });
+    let dsaInput = document.getElementById(courseId + 'DSA');
+    let webDInput = document.getElementById(courseId + 'WebD');
+    let reactInput = document.getElementById(courseId + 'React');
+
+    const dsaMarks = dsaInput.value;
+    const webDMarks = webDInput.value;
+    const reactMarks = reactInput.value;
+    const courseScore = {
+            scoreDSA: dsaMarks,
+            scoreWebD: webDMarks,
+            scoreReact: reactMarks
+        }
+        // console.log(dsaMarks);
+        // console.log(webDMarks);
+        // console.log(reactMarks);
+
+    try {
+        const response = await fetch(URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(courseScore)
+        });
 
 
-//         console.log("response ", response);
-//         const jsonData = await response.json();
-//         const data = jsonData.data;
-//         console.log("data=", data);
-//         if (jsonData.success) {
-//             target.innerText = "updated";
-//             target.style = "background-color:pink"
+        console.log("response ", response);
+        const jsonData = await response.json();
+        const data = jsonData.data;
+        console.log("data=", data);
+        if (jsonData.success) {
+            target.innerText = "updated";
+            target.style = "background-color:pink"
 
-//         } else {
-//             console.log(jsonData.message);
-//             target.innerText = "update";
-//             target.style = "background-color:gray"
-//             return;
-//         }
-//     } catch (error) {
-//         console.log("error=", error);
-//         return;
-//     }
+        } else {
+            console.log(jsonData.message);
+            target.innerText = "update";
+            target.style = "background-color:gray"
+            return;
+        }
+    } catch (error) {
+        console.log("error=", error);
+        return;
+    }
 
-// }
+}
+
+
+
+
+// tHead.innerHTML = `<tr>
+// <th>DSA Score</th>
+// <th>WebD Score</th>
+// <th>React Score</th>
+//  <th>Action</th>
+// </tr>`
+
+// tBody.innerHTML = `<tr>
+//     <td id='${course._id+'DSA'}' class='editable' >${course.scoreDSA}</td>
+//     <td id='${course._id+'WebD'}' class='editable' >${course.scoreWebD}</td>
+//     <td id='${course._id+'React'}' class='editable' >${course.scoreReact}</td>
+//     <td><button  onclick="updateCourseScore(event,'${course._id}')">update</button></td>
+//   </tr>`;

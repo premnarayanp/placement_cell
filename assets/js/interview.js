@@ -167,10 +167,10 @@ function showAssignedStudents(interview) {
 
         tr.innerHTML = `
         <td>${student.name} </td>
-        <td><input type="checkbox" id='${results._id +'pass'}'         ${results.pass?'checked':''}/></td>
-        <td><input type="checkbox" id='${results._id +'fail'}'         ${results.fail?'checked':''}/></td>
-        <td><input type="checkbox" id='${results._id +'onHold'}'       ${results.onHold?'checked':''}/></td>
-        <td><input type="checkbox" id='${results._id +'doNotAttempt'}' ${results.doNotAttempt?'checked':''}/></td>
+        <td><input type="checkbox" id='${results._id +'pass'}'  value='pass'  ${results.pass?'checked':''}/></td>
+        <td><input type="checkbox" id='${results._id +'fail'}'  value='fail'       ${results.fail?'checked':''}/></td>
+        <td><input type="checkbox" id='${results._id +'onHold'}' value='onHold'     ${results.onHold?'checked':''}/></td>
+        <td><input type="checkbox" id='${results._id +'doNotAttempt'}' value='doNotAttempt' ${results.doNotAttempt?'checked':''}/></td>
         <td><button onclick="updateResults(event,'${results._id}')">update</button></td>`;
         tBody.appendChild(tr);
     }
@@ -198,6 +198,16 @@ async function updateResults(e, resultsId) {
     let onHold = document.getElementById(resultsId + 'onHold').checked;
     let doNotAttempt = document.getElementById(resultsId + 'doNotAttempt').checked;
 
+
+    let finalResult = 'onHold';
+    if (pass) {
+        finalResult = 'pass';
+    } else if (fail) {
+        finalResult = 'fail';
+    } else if (doNotAttempt) {
+        finalResult = 'doNotAttempt';
+    }
+
     // console.log("pass=", pass.checked);
     // console.log("fail=", fail.checked);
     // console.log("onHold=", onHold.checked);
@@ -207,7 +217,8 @@ async function updateResults(e, resultsId) {
         pass: pass,
         fail: fail,
         onHold: onHold,
-        doNotAttempt: doNotAttempt
+        doNotAttempt: doNotAttempt,
+        finalResult: finalResult
     };
 
     console.log("Data==", results);
