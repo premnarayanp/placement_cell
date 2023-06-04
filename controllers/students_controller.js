@@ -2,6 +2,9 @@ const LastIndexCounter = require("../models/lastIndexCounter");
 const Batch = require('../models/batch');
 const Student = require('../models/student');
 const Course = require('../models/course');
+const Result = require('../models/result');
+const Interview = require('../models/interview');
+
 //create Students
 
 //find all students according batchWise
@@ -96,10 +99,22 @@ module.exports.delete = async function(req, res) {
 
         if (student && student.user == req.user.id) {
             let batchId = student.batch;
+            let courseScoreId = student.course;
+
+            //remove student
             await Student.findByIdAndRemove(req.params.id);
+
+            //remove course marks
+            await Course.findByIdAndRemove(courseScoreId);
+
+            //remove  students all interview results 
+            //await Result.deleteMany({ student: req.params.id });
+
+            //remove student from batch,s students array
             let batch = await Batch.findByIdAndUpdate(batchId, {
                 $pull: { students: req.params.id },
             });
+
             batch.studentsCount = batch.studentsCount - 1;
             batch.save();
             return res.send({ success: true, message: "Student Deleted Successfully" });

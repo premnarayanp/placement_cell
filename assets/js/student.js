@@ -43,6 +43,7 @@ function appendStudentInTable(data) {
     let studentTableBody = document.getElementById(data.batch);
 
     let tr = document.createElement('tr');
+    let moreDetailRow = document.createElement('tr');
     let studentID = document.createElement('td');
     let studentName = document.createElement('td');
     let studentCollege = document.createElement('td');
@@ -50,18 +51,27 @@ function appendStudentInTable(data) {
     let actionBtn = document.createElement('td');
 
     tr.id = data._id;
+    moreDetailRow.id = data._id + 'row';
     studentID.innerText = data.studentId;
     studentName.innerText = data.name;
     studentCollege.innerText = data.college;
     status.innerText = data.status;
     actionBtn.innerHTML = `<button onclick="viewStudentDetail('${data._id}')">View</button>
                             <button onclick="deleteStudents('${data._id}','${data.batch}')">Delete</button>`;
+
+    moreDetailRow.innerHTML = `<td class="more-details-container" colspan="5" id="${data._id+'details'}">
+                                <!----------------------------Course table----------------------------------->
+                                <!------------------------Interview List--------------------------------->
+                            </td>`;
+
     tr.appendChild(studentID);
     tr.appendChild(studentName);
     tr.appendChild(studentCollege);
     tr.appendChild(status);
     tr.appendChild(actionBtn);
+
     studentTableBody.appendChild(tr);
+    studentTableBody.appendChild(moreDetailRow);
 }
 
 //insert new created student in Form select option
@@ -105,6 +115,10 @@ function removeStudentFromTable(id, batchId) {
     let studentTableBody = document.getElementById(batchId);
     let removAbleRow = document.getElementById(id);
     let studentMoreDetailRow = document.getElementById(id + 'row');
+    console.log(studentTableBody);
+    console.log(removAbleRow);
+    console.log(studentMoreDetailRow);
+
     studentTableBody.removeChild(removAbleRow);
     studentTableBody.removeChild(studentMoreDetailRow);
     //return;
@@ -115,7 +129,10 @@ function removeStudentFromTable(id, batchId) {
 function removeStudentInForm(studentId, batchId) {
     let optgroup = document.getElementById(batchId + 'optgroup');
     let removAbleOption = document.getElementById(studentId + 'option');
-    optgroup.removeChild(removAbleOption);
+    if (optgroup) {
+        optgroup.removeChild(removAbleOption);
+    }
+
 }
 
 //view more details of students
@@ -132,6 +149,7 @@ async function viewStudentDetail(studentId) {
             const student = data.student;
             if (student.course) {
                 showCourseScore(student.course);
+                //console.log(student._id);
             } else {
                 showCourseScore({ scoreDSA: "__", scoreWebD: "__", scoreReact: "__", student: student._id });
             }

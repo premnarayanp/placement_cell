@@ -39,32 +39,39 @@ module.exports.create = async function(req, res) {
     }
 
     try {
-        const batch = await Batch.findOne({ name: req.body.name });
-        console.log("=========batch===========", batch);
-        if (!batch || batch == null) {
-            const lastIndexCounter = await LastIndexCounter.findOne({});
-            if (lastIndexCounter == null) {
-                lastIndexCounter = await LastIndexCounter.create({
-                    lastIndexOfBatch: 100,
-                    lastIndexOfStudents: 100
+        //we do not create same name batch 
+        let batchSchema = await Batch.findOne({ name: req.body.name });
+        console.log("=========batch===========", batchSchema);
+        if (!batchSchema) {
+            try {
+                let lastIndexCounter = await LastIndexCounter.findOne({});
+                if (lastIndexCounter == null) {
+                    lastIndexCounter = await LastIndexCounter.create({
+                        lastIndexOfBatch: 100,
+                        lastIndexOfStudents: 100
+                    });
+                }
+                // console.log(lastIndexCounter);
+
+                const batch = await Batch.create({
+                    batchId: lastIndexCounter.lastIndexOfBatch + 1,
+                    name: req.body.name,
+                    user: req.user.id,
+                    studentsCount: 0
                 });
+
+                lastIndexCounter.lastIndexOfBatch = lastIndexCounter.lastIndexOfBatch + 1;
+                await lastIndexCounter.save();
+                results.success = true;
+
+                results.data = { batch: batch, author: req.user.name };
+                // console.log("========req.user.name===========", req.user.name);
+                return res.send(results);
+
+            } catch (error) {
+                console.log("error", error);
             }
-            // console.log(lastIndexCounter);
 
-            const batch = await Batch.create({
-                batchId: lastIndexCounter.lastIndexOfBatch + 1,
-                name: req.body.name,
-                user: req.user.id,
-                studentsCount: 0
-            });
-
-            lastIndexCounter.lastIndexOfBatch = lastIndexCounter.lastIndexOfBatch + 1;
-            await lastIndexCounter.save();
-            results.success = true;
-
-            results.data = { batch: batch, author: req.user.name };
-            // console.log("========req.user.name===========", req.user.name);
-            return res.send(results);
         } else {
             results.success = false;
             results.data = "Batch Already Exist";
@@ -72,7 +79,7 @@ module.exports.create = async function(req, res) {
         }
 
     } catch (error) {
-        //console.log('error in finding batch');
+        console.log('error in finding batch');
         results.success = false;
         results.data = "error in finding/creating batch";
         return res.send(results);
@@ -94,6 +101,8 @@ module.exports.delete = async function(req, res) {
         if (batch && batch.user == req.user.id) {
             await Batch.findByIdAndRemove(req.params.id);
             await Student.deleteMany({ batch: req.params.id });
+
+            //need to delete related course results ....but
             return res.send({ success: true, message: "Batch Deleted Successfully" });
         } else {
             return res.send({ success: false, message: "You can not delate this Batch" });

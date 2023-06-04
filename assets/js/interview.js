@@ -42,23 +42,37 @@ function appendInterviewInTable(interview) {
     let interviewTableBody = document.getElementById('interviewTableBody');
 
     let tr = document.createElement('tr');
+    let moreDetailRow = document.createElement('tr');
+
     let company = document.createElement('td');
     let date = document.createElement('td');
     let numOfStudents = document.createElement('td');
     // let actionBtn = document.createElement('td');
 
     tr.id = interview._id;
+    tr.className = "trEffect";
+    moreDetailRow.id = interview._id + 'row';
     company.innerText = interview.company;
     date.innerText = interview.date;
     numOfStudents.innerText = interview.numOfStudents;
     numOfStudents.id = interview._id + 'stuNum';
-    // actionBtn.innerHTML = `<button onclick="viewAssignedStudents('${interview._id}')">View</button>
-    //                         <button onclick="deleteInterview('${interview._id}')">Delete</button>`;
+
+    //actionBtn.innerHTML = `<button onclick="viewAssignedStudents('${interview._id}')">View</button>
+    //                       <button onclick="deleteInterview('${interview._id}')">Delete</button>`;
+
+    tr.setAttribute('onclick', `viewAssignedStudents('${interview._id}')`);
+
+    moreDetailRow.innerHTML = `<td class="more-details-container" colspan="5" id="${interview._id+'details'}">
+    <!----------------------------Course table----------------------------------->
+    <!------------------------Interview List--------------------------------->
+</td>`;
+
     tr.appendChild(company);
     tr.appendChild(date);
     tr.appendChild(numOfStudents);
     // tr.appendChild(actionBtn);
     interviewTableBody.appendChild(tr);
+    interviewTableBody.appendChild(moreDetailRow);
 }
 
 //insert new created interview in Form select option
@@ -237,14 +251,22 @@ async function updateResults(e, resultsId) {
         const jsonData = await response.json();
         const data = jsonData.data;
         console.log("data=", data);
+
         if (jsonData.success) {
+            let result = data.result;
+            let status = document.getElementById(result.student + 'status');
+            if (status && result.finalResult == 'pass') {
+                status.innerText = 'Placed';
+            }
             target.innerText = "updated";
             target.style = "background-color:pink"
+
 
         } else {
             console.log(jsonData.message);
             target.innerText = "update";
             target.style = "background-color:gray"
+
             return;
         }
     } catch (error) {

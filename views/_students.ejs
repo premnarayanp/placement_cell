@@ -1,4 +1,4 @@
-<div class="studentList-container">
+<div class="studentList-container" id="<%=batch.name%>">
     <span class="batch-heading"><%=batch.name%></span>
     <table class="student-table">
         <thead>
@@ -26,7 +26,7 @@
                         <%=student.college%>
                     </td>
 
-                    <td>
+                    <td id="<%= student.id+'status'%>">
                         <%=student.status%>
                     </td>
 

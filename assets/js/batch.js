@@ -45,7 +45,7 @@ function appendBatchInTable(data) {
     let studentNum = document.createElement('td');
     let actionBtn = document.createElement('td');
 
-    tr.id = data._id;
+    tr.id = data._id + 'row';
     batchID.innerText = data.batchId;
     batchName.innerText = data.name;
     author.innerText = data.author;
@@ -90,7 +90,7 @@ async function deleteBatch(e, id) {
 //also delete batch from Table
 function removeBatchFromTable(id) {
     let batchTableBody = document.getElementById('batchTableBody');
-    let removAbleRow = document.getElementById(id);
+    let removAbleRow = document.getElementById(id + 'row');
     //  removAbleRow.innerHTML = "";
     batchTableBody.removeChild(removAbleRow);
     //return;

@@ -1,4 +1,5 @@
 const Result = require('../models/result');
+const Student = require('../models/student');
 module.exports.update = async function(req, res) {
     console.log("======req body==============", req.body);
 
@@ -14,6 +15,13 @@ module.exports.update = async function(req, res) {
                 result.doNotAttempt = body.doNotAttempt,
                 result.finalResult = body.finalResult
             result.save();
+
+            if (body.finalResult == 'pass') {
+                const student = await Student.findById(result.student);
+                student.status = "Placed";
+                student.save();
+            }
+
             console.log("===========Results==========", result);
             return res.send({ success: true, data: { result: result }, message: "Successfully  results updated" });
         } else {

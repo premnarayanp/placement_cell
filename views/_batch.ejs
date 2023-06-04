@@ -15,7 +15,7 @@
 
             <%for(index in locals.batches){%>
                 <%let batch=locals.batches[index] %>
-                    <tr id="<%= batch.id%>">
+                    <tr id="<%= batch.id+'row'%>">
                         <td>
                             <%= batch.batchId%>
                         </td>
@@ -30,7 +30,7 @@
                             <%= batch.studentsCount%>
                         </td>
                         <td>
-                            <button onclick="viewBatchStudents(event,'<%=batch.id%>')">View</button>
+                            <a href="<%='#'+batch.name%>">View</a>
                             <%if(locals.user && locals.user.id==batch.user._id){%>
                                 <button onclick="deleteBatch(event,'<%=batch.id%>')">Delete</button>
                                 <%}%>
