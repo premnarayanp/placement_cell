@@ -1,5 +1,4 @@
 //Create Student .........
-
 async function createStudent(e) {
     const URL = 'http://localhost:8394/students/create';
     e.preventDefault();
@@ -165,8 +164,8 @@ async function viewStudentDetail(studentId) {
     }
 }
 
+//Show course score of students
 function showCourseScore(course) {
-
     //let studentMoreDetailContainerRow = document.getElementById(course.student + 'row');
     let studentMoreDetailContainer = document.getElementById(course.student + 'details');
 
@@ -201,6 +200,8 @@ function showCourseScore(course) {
         // studentMoreDetailContainerRow.style = "display: table-row;"
 }
 
+
+//show interviews list
 function showInterviewList(interviewList, studentID) {
 
     let studentMoreDetailContainer = document.getElementById(studentID + 'details');
@@ -238,10 +239,10 @@ function showInterviewList(interviewList, studentID) {
         tr.innerHTML = `
         <td>${interview.company} </td>
         <td>${interview.date} </td>
-        <td><input type="checkbox" id='${results._id +'pass'}' value='pass' ${results.pass?'checked':''}/></td>
-        <td><input type="checkbox" id='${results._id +'fail'}' value='fail' ${results.fail?'checked':''}/></td>
-        <td><input type="checkbox" id='${results._id +'onHold'}' value='onHold' ${results.onHold?'checked':''}/></td>
-        <td><input type="checkbox" id='${results._id +'doNotAttempt'}' value='doNotAttempt'  ${results.doNotAttempt?'checked':''}/></td>
+        <td><input type="checkbox" onclick="toggleInput(event,'${results._id}')" id='${results._id +'pass'}' value='pass' ${results.pass?'checked':''}/></td>
+        <td><input type="checkbox" onclick="toggleInput(event,'${results._id}')" id='${results._id +'fail'}' value='fail' ${results.fail?'checked':''}/></td>
+        <td><input type="checkbox" onclick="toggleInput(event,'${results._id}')" id='${results._id +'onHold'}' value='onHold' ${results.onHold?'checked':''}/></td>
+        <td><input type="checkbox" onclick="toggleInput(event,'${results._id}')" id='${results._id +'doNotAttempt'}' value='doNotAttempt'  ${results.doNotAttempt?'checked':''}/></td>
         <td><button onclick="updateResults(event,'${results._id}')">update</button></td>`;
         tBody.appendChild(tr);
     }
@@ -255,7 +256,7 @@ function showInterviewList(interviewList, studentID) {
 
 }
 
-//
+// when click outside  of inner tables or moreDetailsContainer then more detail hide
 document.addEventListener('click', (e) => {
     const target = e.target;
     if (target.className == "more-details-container") {
@@ -265,6 +266,29 @@ document.addEventListener('click', (e) => {
     }
 });
 
+
+// toggle interview result /input when checked
+//when anyone checked then other all  checked input unchecked
+function toggleInput(e, resultsId) {
+    const target = e.target;
+
+    document.getElementById(resultsId + 'pass').checked = false;
+    document.getElementById(resultsId + 'fail').checked = false;
+    document.getElementById(resultsId + 'onHold').checked = false;
+    document.getElementById(resultsId + 'doNotAttempt').checked = false;
+    target.checked = true;
+
+    // const toggleInput = document.getElementsByClassName('toggleInput');
+    // for (let i = 0; i < toggleInput; i++) {
+    //     toggleInput[i].checked = false;
+    // }
+    //target.checked = true;
+    //console.log(target);
+}
+
+
+
+//Update Course Score  as  DSAmarks /WebD marks/React marks
 async function updateCourseScore(e, courseId) {
     const URL = `http://localhost:8394/courses/update/${courseId}`;
     //e.preventDefault();

@@ -148,6 +148,7 @@ async function viewAssignedStudents(interviewId) {
     }
 }
 
+// show assigned students in table
 function showAssignedStudents(interview) {
     let studentsList = interview.assignedStudentList;
     let interviewId = interview._id;
@@ -181,10 +182,10 @@ function showAssignedStudents(interview) {
 
         tr.innerHTML = `
         <td>${student.name} </td>
-        <td><input type="checkbox" id='${results._id +'pass'}'  value='pass'  ${results.pass?'checked':''}/></td>
-        <td><input type="checkbox" id='${results._id +'fail'}'  value='fail'       ${results.fail?'checked':''}/></td>
-        <td><input type="checkbox" id='${results._id +'onHold'}' value='onHold'     ${results.onHold?'checked':''}/></td>
-        <td><input type="checkbox" id='${results._id +'doNotAttempt'}' value='doNotAttempt' ${results.doNotAttempt?'checked':''}/></td>
+        <td><input type="checkbox" onclick="toggleInput(event,'${results._id}')" id='${results._id +'pass'}'  value='pass'  ${results.pass?'checked':''}/></td>
+        <td><input type="checkbox" onclick="toggleInput(event,'${results._id}')" id='${results._id +'fail'}'  value='fail'       ${results.fail?'checked':''}/></td>
+        <td><input type="checkbox" onclick="toggleInput(event,'${results._id}')" id='${results._id +'onHold'}' value='onHold'     ${results.onHold?'checked':''}/></td>
+        <td><input type="checkbox" onclick="toggleInput(event,'${results._id}')" id='${results._id +'doNotAttempt'}' value='doNotAttempt' ${results.doNotAttempt?'checked':''}/></td>
         <td><button onclick="updateResults(event,'${results._id}')">update</button></td>`;
         tBody.appendChild(tr);
     }
@@ -199,6 +200,7 @@ function showAssignedStudents(interview) {
 
 
 
+//update interview results 
 async function updateResults(e, resultsId) {
     const URL = `http://localhost:8394/results/update/${resultsId}`;
     //e.preventDefault();

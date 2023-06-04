@@ -1,3 +1,4 @@
+//add corse score of students
 async function submitCourseScore(e) {
     const URL = 'http://localhost:8394/courses/create';
     e.preventDefault();
