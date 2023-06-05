@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1/placement_cell');
+mongoose.connect(process.env.MONGO_DB_URL);
+//FOR LOCAL:- 'mongodb://127.0.0.1/placement_cell'
 
 const db = mongoose.connection;
 

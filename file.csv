@@ -1,0 +1,7 @@
+Student id,Student Name,Student College,Student Status,DSA Score,WebD Score,React Score,Interview Date,Interview Company,Interview Result
+101101,prem1,gsce,Placed,100,70,60,2023-06-04,tcs,pass
+101102,prem2,gsce,Placed,No Marks,No Marks,No Marks,2023-06-04,tcs,pass
+101103,prem3,gsce,Not Placed,No Marks,No Marks,No Marks,2023-06-04,infosis,
+102104,prem4,gsce,Not Placed,No Marks,No Marks,No Marks,--/--/--,Nothing,onHold
+101105,Prem6,GSCE,Not Placed,100,200,300,--/--/--,Nothing,onHold
+101106,Prem20,GSCE,Not Placed,No Marks,No Marks,No Marks,--/--/--,Nothing,onHold

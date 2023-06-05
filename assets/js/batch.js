@@ -1,6 +1,7 @@
+//const BASE_URL = 'http://localhost:8394';
 //Create Batch,post req  as Batch
 async function createBatch(e) {
-    const URL = 'http://localhost:8394/batches/create';
+    const URL = BASE_URL + '/batches/create';
     const input = document.getElementById("batchName");
     e.preventDefault();
 
@@ -65,7 +66,7 @@ function appendBatchInTable(data) {
 //Delete the batch
 async function deleteBatch(e, id) {
     //console.log(id);
-    const URL = `http://localhost:8394/batches/delete/${id}`;
+    const URL = BASE_URL + `/batches/delete/${id}`;
     e.preventDefault();
 
     try {

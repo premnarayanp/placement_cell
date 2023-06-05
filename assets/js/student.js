@@ -1,6 +1,8 @@
+//const BASE_URL = 'http://localhost:8394';
+
 //Create Student .........
 async function createStudent(e) {
-    const URL = 'http://localhost:8394/students/create';
+    const URL = BASE_URL + '/students/create';
     e.preventDefault();
 
     var elements = document.getElementById("student-forms").elements;
@@ -86,7 +88,7 @@ function appendStudentInForm(student) {
 //Delete the Students
 async function deleteStudents(id, batchId) {
     //console.log(id);
-    const URL = `http://localhost:8394/students/delete/${id}`;
+    const URL = BASE_URL + `/students/delete/${id}`;
     //e.preventDefault();
 
     try {
@@ -136,7 +138,7 @@ function removeStudentInForm(studentId, batchId) {
 
 //view more details of students
 async function viewStudentDetail(studentId) {
-    const URL = `http://localhost:8394/students/details/${studentId}`;
+    const URL = BASE_URL + `/students/details/${studentId}`;
     try {
         const response = await fetch(URL);
         console.log("response ", response);
@@ -290,7 +292,7 @@ function toggleInput(e, resultsId) {
 
 //Update Course Score  as  DSAmarks /WebD marks/React marks
 async function updateCourseScore(e, courseId) {
-    const URL = `http://localhost:8394/courses/update/${courseId}`;
+    const URL = BASE_URL + `/courses/update/${courseId}`;
     //e.preventDefault();
     const target = e.target;
     target.innerText = "Upd....";

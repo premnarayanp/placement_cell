@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const courseSchema = new mongoose.Schema({
     scoreDSA: {
         type: String,
-        required: true,
+        // required: true,
     },
     scoreWebD: {
         type: String,
-        required: true,
+        // required: true,
     },
     scoreReact: {
         type: String,
-        required: true,
+        // required: true,
     },
     student: {
         type: mongoose.Schema.Types.ObjectId,

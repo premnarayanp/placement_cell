@@ -1,6 +1,7 @@
+//const BASE_URL = 'http://localhost:8394';
 //add corse score of students
 async function submitCourseScore(e) {
-    const URL = 'http://localhost:8394/courses/create';
+    const URL = BASE_URL + '/courses/create';
     e.preventDefault();
 
     var elements = document.getElementById("course-forms").elements;

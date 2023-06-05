@@ -1,6 +1,7 @@
+//const BASE_URL = 'http://localhost:8394';
 //create interview 
 async function createInterview(e) {
-    const URL = 'http://localhost:8394/interviews/create';
+    const URL = BASE_URL + '/interviews/create';
     e.preventDefault();
 
     var elements = document.getElementById("interview-form").elements;
@@ -88,7 +89,7 @@ function appendInterviewInForm(interview) {
 
 //Assign interview to students
 async function assignInterviewToStudents(e) {
-    const URL = 'http://localhost:8394/interviews/assign';
+    const URL = BASE_URL + '/interviews/assign';
     e.preventDefault();
 
     var elements = document.getElementById("interview-initializer").elements;
@@ -129,7 +130,7 @@ async function assignInterviewToStudents(e) {
 
 //get assigned students of interview
 async function viewAssignedStudents(interviewId) {
-    const URL = `http://localhost:8394/interviews/details/${interviewId}`;
+    const URL = BASE_URL + `/interviews/details/${interviewId}`;
     try {
         const response = await fetch(URL);
         console.log("response ", response);
@@ -202,7 +203,7 @@ function showAssignedStudents(interview) {
 
 //update interview results 
 async function updateResults(e, resultsId) {
-    const URL = `http://localhost:8394/results/update/${resultsId}`;
+    const URL = BASE_URL + `/results/update/${resultsId}`;
     //e.preventDefault();
     const target = e.target;
     // e.target.innerText = "up....";
